@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>by Gustavo Mezomo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background-color: #d9263e;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c6626f;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora dos Graus - Unisinos</h2>
+        <label for="grauA">Nota Grau A:</label>
+        <input type="number" id="grauA" step="0.1" placeholder="Digite a nota do Grau A">
+
+        <label for="grauB">Nota Grau B:</label>
+        <input type="number" id="grauB" step="0.1" placeholder="Digite a nota do Grau B">
+
+        <button onclick="calcular()">Calcular</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calcular() {
+            const grauA = parseFloat(document.getElementById("grauA").value);
+            const grauB = parseFloat(document.getElementById("grauB").value);
+
+            if (isNaN(grauA) || isNaN(grauB)) {
+                document.getElementById("result").innerHTML = "Por favor, insira notas válidas.";
+                return;
+            }
+
+            const pesoA = 0.33;
+            const pesoB = 0.67;
+            const media = (grauA * pesoA) + (grauB * pesoB);
+
+            if (media >= 6.0) {
+                document.getElementById("result").innerHTML = `
+                    <strong>Média:</strong> ${media.toFixed(2)}<br>
+                    <strong>Status:</strong> Aprovado! 🎉
+                `;
+            } else {
+                const notaMinA = Math.ceil(((6.0 - (grauB * pesoB)) / pesoA) * 10) / 10;
+                const notaMinB = Math.ceil(((6.0 - (grauA * pesoA)) / pesoB) * 10) / 10;
+
+                const recomendacao = notaMinA <= notaMinB ? "A" : "B";
+
+                document.getElementById("result").innerHTML = `
+                    <strong>Média:</strong> ${media.toFixed(2)}<br>
+                    <strong>Status:</strong> Reprovado 😞<br><br>
+                    Para ser aprovado no Grau C:<br>
+                    - Nota mínima no Grau A: ${notaMinA.toFixed(1)}<br>
+                    - Nota mínima no Grau B: ${notaMinB.toFixed(1)}<br>
+                    <strong>Recomendação:</strong> Substituir Grau ${recomendacao}.
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
