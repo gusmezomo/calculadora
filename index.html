@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Calculadora Unisinos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora dos Graus - Unisinos</h2>
+        <label for="grauA">Nota Grau A:</label>
+        <input type="number" id="grauA" step="0.1" placeholder="Digite a nota do Grau A">
+
+        <label for="grauB">Nota Grau B:</label>
+        <input type="number" id="grauB" step="0.1" placeholder="Digite a nota do Grau B">
+
+        <button onclick="calcular()">Calcular</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <footer>
+        Desenvolvido por <strong>Gustavo Mezomo</strong>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
