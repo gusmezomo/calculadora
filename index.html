@@ -18,7 +18,16 @@
         <button onclick="calcular()">Calcular</button>
 
         <div class="result" id="result"></div>
+
+        <div id="extraFields" style="display: none; margin-top: 15px;">
+            <label for="cadeira">Nome da Cadeira:</label>
+            <input type="text" id="cadeira" placeholder="Opcional !" />
+        
+            <button id="copiarBtn" onclick="copiarResultado()">Copiar resultado</button>
+        </div>
+
     </div>
+
 
     <footer>
         Desenvolvido por <strong>Gustavo Mezomo</strong>

@@ -31,6 +31,9 @@ function calcular() {
             <strong>Recomendação:</strong> Substituir Grau ${recomendacao}.
         `;
     }
+
+    document.getElementById("extraFields").style.display = "block";
+
 }
 
 function bloquearNotasInvalidas(id) {
@@ -62,6 +65,24 @@ function bloquearNotasInvalidas(id) {
         input.value = valor;
     });
 }
+
+function copiarResultado() {
+    const cadeira = document.getElementById("cadeira").value.trim();
+    const resultDiv = document.getElementById("result");
+    const textoBruto = resultDiv.innerText;
+
+    const textoFormatado = 
+        (cadeira ? `📚 Cadeira: ${cadeira}\n` : '') +
+        textoBruto;
+
+    navigator.clipboard.writeText(textoFormatado).then(() => {
+        alert("Resultado copiado para a área de transferência!");
+    }).catch(() => {
+        alert("Não foi possível copiar. Tente manualmente.");
+    });
+}
+
+
 
 window.addEventListener('DOMContentLoaded', () => {
     bloquearNotasInvalidas('grauA');
