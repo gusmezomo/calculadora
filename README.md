@@ -1,2 +1,5 @@
-codigo criado para realizar os calculos das notas dos graus da Unisinos
+# Codigo feito por aluno da Unisinos 
+criado com o objetivo de realizar os calculos das notas das cadeiras de uma forma pratica.
+
+## Link de acesso:
 https://calculadorauni.netlify.app
