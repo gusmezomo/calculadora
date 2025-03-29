@@ -32,3 +32,38 @@ function calcular() {
         `;
     }
 }
+
+function bloquearNotasInvalidas(id) {
+    const input = document.getElementById(id);
+
+    input.addEventListener('input', () => {
+        let valor = input.value.replace(',', '').replace('.', '');
+
+        // Remove qualquer caractere que não seja número
+        valor = valor.replace(/[^0-9]/g, '');
+
+        // Se tiver 2 ou mais dígitos, transforma em decimal (ex: 53 -> 5.3)
+        if (valor.length >= 2) {
+            valor = valor.slice(0, 2); // pega os dois primeiros dígitos
+            valor = valor[0] + '.' + valor[1];
+        } else if (valor.length === 1) {
+            valor = valor;
+        } else {
+            valor = '';
+        }
+
+        // Limita o valor entre 1 e 10
+        const num = parseFloat(valor);
+        if (!isNaN(num)) {
+            if (num > 10) valor = '10';
+            else if (num < 1) valor = '1';
+        }
+
+        input.value = valor;
+    });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    bloquearNotasInvalidas('grauA');
+    bloquearNotasInvalidas('grauB');
+});
