@@ -56,3 +56,32 @@ footer {
     font-size: 14px;
     color: #f5f5f5;
 }
+
+.botoes-acoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.botoes-acoes button {
+    flex: 1;
+    background-color: #19236f;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.botoes-acoes button:hover {
+    background-color: #3d426b;
+}
+
+.botoes-acoes button:last-child {
+    max-width: 50px;
+    padding: 10px 0;
+    font-size: 18px;
+}
+

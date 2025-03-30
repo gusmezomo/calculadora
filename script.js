@@ -97,11 +97,11 @@ function bloquearNotasInvalidas(id) {
             valor = '';
         }
 
-        // Limita o valor entre 1 e 10
+        // Limita o valor entre 0.1 e 10
         const num = parseFloat(valor);
         if (!isNaN(num)) {
             if (num > 10) valor = '10';
-            else if (num < 0.1 && valor !== '') valor = '0.1'; // ✅ aqui está o ajuste real
+            else if (num < 0.1 && valor !== '') valor = '0.1';
         }
 
         input.value = valor;
