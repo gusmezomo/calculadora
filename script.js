@@ -56,18 +56,26 @@ function calcular() {
         const notaMinB = Math.ceil(((6.0 - (grauA * pesoA)) / pesoB) * 10) / 10;
         const recomendacao = notaMinA <= notaMinB ? "A" : "B";
 
-        document.getElementById("result").innerHTML = `
+        let textoReprovado = `
             <strong>Média:</strong> ${media.toFixed(2)}<br>
             <strong>Status:</strong> Reprovado 😞<br><br>
             Para ser aprovado no Grau C:<br>
-            - Nota mínima no Grau A: ${notaMinA.toFixed(1)}<br>
-            - Nota mínima no Grau B: ${notaMinB.toFixed(1)}<br>
-            <strong>Recomendação:</strong> Substituir Grau ${recomendacao}.
         `;
+
+        textoReprovado += `<strong>Recomendação:</strong> Substituir Grau ${recomendacao}.<br><br>`;
+
+        if (recomendacao === "A") {
+            textoReprovado += `- Nota mínima no Grau A: ${notaMinA.toFixed(1)}<br>`;
+        } else {
+            textoReprovado += `- Nota mínima no Grau B: ${notaMinB.toFixed(1)}<br>`;
+        }
+
+        document.getElementById("result").innerHTML = textoReprovado;
     }
 
     document.getElementById("extraFields").style.display = "block";
 }
+
 
 
 function bloquearNotasInvalidas(id) {
