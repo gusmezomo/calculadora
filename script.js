@@ -74,9 +74,9 @@ function calcular() {
     }
 
     document.getElementById("extraFields").style.display = "block";
+
+    document.getElementById("compartilharBtn").style.display = "block";
 }
-
-
 
 function bloquearNotasInvalidas(id) {
     const input = document.getElementById(id);
@@ -124,7 +124,26 @@ function copiarResultado() {
     });
 }
 
+function compartilharResultado() {
+    const cadeira = document.getElementById("cadeira").value.trim();
+    const resultDiv = document.getElementById("result");
+    const textoBruto = resultDiv.innerText;
 
+    const textoFormatado = 
+        (cadeira ? `📚 Cadeira: ${cadeira}\n` : '') +
+        textoBruto;
+
+    if (navigator.share) {
+        navigator.share({
+            title: 'Resultado da Calculadora Unisinos',
+            text: textoFormatado
+        }).catch((err) => {
+            alert("Erro ao compartilhar: " + err);
+        });
+    } else {
+        alert("Este dispositivo ou navegador não suporta o compartilhamento direto.");
+    }
+}
 
 window.addEventListener('DOMContentLoaded', () => {
     bloquearNotasInvalidas('grauA');
