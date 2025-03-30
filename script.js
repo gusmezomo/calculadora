@@ -16,8 +16,8 @@ function calcular() {
 
     // Apenas Grau A preenchido → calcular quanto precisa no Grau B
     if (grauA !== null && grauB === null) {
-        if (isNaN(grauA) || grauA < 1 || grauA > 10) {
-            document.getElementById("result").innerHTML = "A nota do Grau A deve estar entre 1 e 10.";
+        if (isNaN(grauA) || grauA < 0.1 || grauA > 10) {
+            document.getElementById("result").innerHTML = "A nota do Grau A deve estar entre 0.1 e 10.";
             return;
         }
 
@@ -93,7 +93,7 @@ function bloquearNotasInvalidas(id) {
         const num = parseFloat(valor);
         if (!isNaN(num)) {
             if (num > 10) valor = '10';
-            else if (num < 1) valor = '1';
+            else if (num < 0.1 && valor !== '') valor = '0.1'; // ✅ aqui está o ajuste real
         }
 
         input.value = valor;
