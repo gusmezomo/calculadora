@@ -1,14 +1,49 @@
 function calcular() {
-    const grauA = parseFloat(document.getElementById("grauA").value);
-    const grauB = parseFloat(document.getElementById("grauB").value);
+    let grauA = document.getElementById("grauA").value.replace(',', '.');
+    let grauB = document.getElementById("grauB").value.replace(',', '.');
 
+    grauA = grauA ? parseFloat(grauA) : null;
+    grauB = grauB ? parseFloat(grauB) : null;
+
+    const pesoA = 0.33;
+    const pesoB = 0.67;
+
+    // Nenhuma nota preenchida
+    if (grauA === null && grauB === null) {
+        document.getElementById("result").innerHTML = "Por favor, insira pelo menos a nota do Grau A.";
+        return;
+    }
+
+    // Apenas Grau A preenchido → calcular quanto precisa no Grau B
+    if (grauA !== null && grauB === null) {
+        if (isNaN(grauA) || grauA < 1 || grauA > 10) {
+            document.getElementById("result").innerHTML = "A nota do Grau A deve estar entre 1 e 10.";
+            return;
+        }
+
+        const notaMinB = ((6.0 - (grauA * pesoA)) / pesoB);
+        if (notaMinB > 10) {
+            document.getElementById("result").innerHTML = `
+                <strong>Nota do Grau A:</strong> ${grauA}<br>
+                😞 Infelizmente, mesmo com 10 no Grau B não é possível atingir média 6.
+            `;
+        } else {
+            document.getElementById("result").innerHTML = `
+                <strong>Nota do Grau A:</strong> ${grauA}<br>
+                Para ser aprovado, você precisa tirar <strong>${notaMinB.toFixed(1)}</strong> no Grau B.
+            `;
+        }
+
+        document.getElementById("extraFields").style.display = "block";
+        return;
+    }
+
+    // Cálculo normal com os dois preenchidos
     if (isNaN(grauA) || isNaN(grauB)) {
         document.getElementById("result").innerHTML = "Por favor, insira notas válidas.";
         return;
     }
 
-    const pesoA = 0.33;
-    const pesoB = 0.67;
     const media = (grauA * pesoA) + (grauB * pesoB);
 
     if (media >= 6.0) {
@@ -19,7 +54,6 @@ function calcular() {
     } else {
         const notaMinA = Math.ceil(((6.0 - (grauB * pesoB)) / pesoA) * 10) / 10;
         const notaMinB = Math.ceil(((6.0 - (grauA * pesoA)) / pesoB) * 10) / 10;
-
         const recomendacao = notaMinA <= notaMinB ? "A" : "B";
 
         document.getElementById("result").innerHTML = `
@@ -33,8 +67,8 @@ function calcular() {
     }
 
     document.getElementById("extraFields").style.display = "block";
-
 }
+
 
 function bloquearNotasInvalidas(id) {
     const input = document.getElementById(id);
